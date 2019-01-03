@@ -1,24 +1,24 @@
-## Lambda表达式：
+### Lambda表达式：
 	- 地址：https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.27
 	- 使用Lambda表达式可以替代只有一个抽象函数的接口实现，告别匿名内部类。
 	- 使用Lambda表达式提升了对集合、框架的迭代、遍历、过滤数据的操作。
 	
-### 特点：
+#### 特点：
 	- 函数式编程
 	- 参数类型推断
 	- 代码量少
 	
-### 好处：
+#### 好处：
 	- 更容易的并行
 	
-### 使用场景：
+#### 使用场景：
 	- 任何有函数式接口的地方
 	
-### 什么是函数式接口？
+#### 什么是函数式接口？
 	- 只有一个抽象方法的接口(Object类的接口除外)是函数式接口
 	- 接口可以使用@FunctionalInterface注解标注
 	
-### JDK1.8之前的一些函数式接口：
+#### JDK1.8之前的一些函数式接口：
 	@FunctionalInterface
 	public interface Runnable
 	@FunctionalInterface
