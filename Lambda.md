@@ -25,7 +25,7 @@
 	public interface Callable<V>
 	public interface Comparable<T> 
 	
-JDK1.8函数式接口：
+#### JDK1.8函数式接口：
 	public interface Supplier<T> 代表一个输出
 	public interface Consumer<T> 代表一个输入
 	public interface BiConsumer<T, U> 代表两个输入
@@ -34,16 +34,16 @@ JDK1.8函数式接口：
 	public interface BiFunction<T, U, R>代表两个个输入一个输出(一般输入和输出是不同类型的)
 	public interface BinaryOperator<T> extends BiFunction<T,T,T> 代表两个个输入一个输出(一般输入和输出是相同类型的)
 	
-Lambda是对象，是一个函数式接口的实例
+#### Lambda是对象，是一个函数式接口的实例
 
-语法：
-LambdaParameters -> LambdaBody
-(args) -> {expr}
-(Object... args) -> {函数式接口抽象方法实现逻辑}
-()里的参数个数，根据函数式接口里面的抽象方法的参数个数来决定
-当只有一个参数时，()可以省略
-当expr逻辑非常简单时，{}和return可以省略
-示例：
+#### 语法：
+- LambdaParameters -> LambdaBody
+- (args) -> {expr}
+- (Object... args) -> {函数式接口抽象方法实现逻辑}
+- ()里的参数个数，根据函数式接口里面的抽象方法的参数个数来决定
+- 当只有一个参数时，()可以省略
+- 当expr逻辑非常简单时，{}和return可以省略
+##### 示例：
 () -> {} //无参，无返回值
 () -> {System.out.println(1);} //无参，无返回值
 () -> System.out.println(1) //无参，无返回值(上面的简写)
@@ -55,17 +55,17 @@ LambdaParameters -> LambdaBody
 (x) -> x+1 //单个参数，有返回值(不指定参数类型，多个参数必须用括号)
 x -> x+1 单个参数，有返回值(不指定参数类型)
 
-注意事项：
+#### 注意事项：
 不需要也不允许使用throws来声明它可能抛出的异常
 
-怎样写好Lambda表达式？
+#### 怎样写好Lambda表达式？
 看参数，看返回值
 
-方法引用：
+#### 方法引用：
 方法引用是用来直接访问类或者实例的已经存在的方法或者构造方法，方法引用提供了一种引用而不执行方法的方式，
 如果抽象方法的实现恰好可以使用调用另外一个方法来实现，就有可能可以使用方法引用。
 
-类型                         语法                                       对应的Lambda
+#### 类型                         语法                                       对应的Lambda
 静态方法引用     类名::staticMethod      (args) -> 类名::staticMethod(args)
 实例方法引用     inst::instMethod        (args) -> inst::instMethod(args)
 对象方法引用     类名::instMethod        (inst,args) -> 类名::instMethod(args)
