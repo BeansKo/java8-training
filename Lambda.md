@@ -1,9 +1,9 @@
-Lambda表达式：
-	地址：https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.27
-	使用Lambda表达式可以替代只有一个抽象函数的接口实现，告别匿名内部类。
-	使用Lambda表达式提升了对集合、框架的迭代、遍历、过滤数据的操作。
+## Lambda表达式：
+	- 地址：https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.27
+	- 使用Lambda表达式可以替代只有一个抽象函数的接口实现，告别匿名内部类。
+	- 使用Lambda表达式提升了对集合、框架的迭代、遍历、过滤数据的操作。
 	
-特点：
+### 特点：
 	函数式编程
 	参数类型推断
 	代码量少
