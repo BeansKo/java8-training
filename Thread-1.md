@@ -23,58 +23,57 @@
 		任务本身需要协作执行：比如生产者消费者问题
 
    ##### 并发编程的挑战之频繁的上下文切换
-		cpu为线程分配时间片，时间片非常短（毫秒级别），cpu不停的切换线程执行，在切换前会保存上一个任务的状态，以便下次切换回这个任务时，可以再加载这个任务的状态，让我们感觉是多个程序同时运行的
+	cpu为线程分配时间片，时间片非常短（毫秒级别），cpu不停的切换线程执行，在切换前会保存上一个任务的状态，以便下次切换回这个任务时，可以再加载这个任务的状态，让我们感觉是多个程序同时运行的
+	上下文的频繁切换，会带来一定的性能开销
 
-		上下文的频繁切换，会带来一定的性能开销
+	如何减少上下文切换的开销？
+	无锁并发编程
+		无锁并发编程。多线程竞争锁时，会引起上下文切换，所以多线程处理数据时，可以用一
+		些办法来避免使用锁，如将数据的ID按照Hash算法取模分段，不同的线程处理不同段的数据
+	CAS
+		Java的Atomic包使用CAS算法来更新数据，而不需要加锁。
 
-		如何减少上下文切换的开销？
-		无锁并发编程
-			无锁并发编程。多线程竞争锁时，会引起上下文切换，所以多线程处理数据时，可以用一
-			些办法来避免使用锁，如将数据的ID按照Hash算法取模分段，不同的线程处理不同段的数据
-		CAS
-			Java的Atomic包使用CAS算法来更新数据，而不需要加锁。
-
-		使用最少线程。
-			避免创建不需要的线程，比如任务很少，但是创建了很多线程来处理，这
-			样会造成大量线程都处于等待状态。
-		协程
-			在单线程里实现多任务的调度，并在单线程里维持多个任务间的切换。--GO
+	使用最少线程。
+		避免创建不需要的线程，比如任务很少，但是创建了很多线程来处理，这
+		样会造成大量线程都处于等待状态。
+	协程
+		在单线程里实现多任务的调度，并在单线程里维持多个任务间的切换。--GO
 
 
-并发编程的挑战之死锁
+   ##### 并发编程的挑战之死锁
 
-		package com.xdclass.synopsis;
+	package com.beans.ko;
 
-		/**
-		 * 死锁Demo
-		 */
-		public class DeadLockDemo {
-		    private static final Object HAIR_A = new Object();
-		    private static final Object HAIR_B = new Object();
+	/**
+	 * 死锁Demo
+	 */
+	public class DeadLockDemo {
+	    private static final Object HAIR_A = new Object();
+	    private static final Object HAIR_B = new Object();
 
-		    public static void main(String[] args) {
-		        new Thread(()->{
-		            synchronized (HAIR_A) {
-		                try {
-		                    Thread.sleep(50L);
-		                } catch (InterruptedException e) {
-		                    e.printStackTrace();
-		                }
-		                synchronized (HAIR_B) {
-		                    System.out.println("A成功的抓住B的头发");
-		                }
-		            }
-		        }).start();
-
-		        new Thread(()->{
-		            synchronized (HAIR_B) {
-		                synchronized (HAIR_A) {
-		                    System.out.println("B成功抓到A的头发");
-		                }
-		            }
-		        }).start();
+	    public static void main(String[] args) {
+		new Thread(()->{
+		    synchronized (HAIR_A) {
+			try {
+			    Thread.sleep(50L);
+			} catch (InterruptedException e) {
+			    e.printStackTrace();
+			}
+			synchronized (HAIR_B) {
+			    System.out.println("A成功的抓住B的头发");
+			}
 		    }
-		}
+		}).start();
+
+		new Thread(()->{
+		    synchronized (HAIR_B) {
+			synchronized (HAIR_A) {
+			    System.out.println("B成功抓到A的头发");
+			}
+		    }
+		}).start();
+	    }
+	}
 
 
 
