@@ -24,20 +24,16 @@
 
    ##### 并发编程的挑战之频繁的上下文切换
 	cpu为线程分配时间片，时间片非常短（毫秒级别），cpu不停的切换线程执行，在切换前会保存上一个任务的状态，以便下次切换回这个任务时，可以再加载这个任务的状态，让我们感觉是多个程序同时运行的
-	上下文的频繁切换，会带来一定的性能开销
+	上下文的频繁切换，会带来一定的性能开销如何减少上下文切换的开销？
+		无锁并发编程
+			无锁并发编程。多线程竞争锁时，会引起上下文切换，所以多线程处理数据时，可以用一些办法来避免使用锁，如将数据的ID按照Hash算法取模分段，不同的线程处理不同段的数据
+		CAS
+			Java的Atomic包使用CAS算法来更新数据，而不需要加锁。
 
-	如何减少上下文切换的开销？
-	无锁并发编程
-		无锁并发编程。多线程竞争锁时，会引起上下文切换，所以多线程处理数据时，可以用一
-		些办法来避免使用锁，如将数据的ID按照Hash算法取模分段，不同的线程处理不同段的数据
-	CAS
-		Java的Atomic包使用CAS算法来更新数据，而不需要加锁。
-
-	使用最少线程。
-		避免创建不需要的线程，比如任务很少，但是创建了很多线程来处理，这
-		样会造成大量线程都处于等待状态。
-	协程
-		在单线程里实现多任务的调度，并在单线程里维持多个任务间的切换。--GO
+		使用最少线程。
+			避免创建不需要的线程，比如任务很少，但是创建了很多线程来处理，这样会造成大量线程都处于等待状态。
+		协程
+			在单线程里实现多任务的调度，并在单线程里维持多个任务间的切换。
 
 
    ##### 并发编程的挑战之死锁
@@ -77,60 +73,58 @@
 
 
 
-并发编程的挑战之线程安全
-		package com.xdclass.synopsis;
+   ##### 并发编程的挑战之线程安全
+	package com.beans.ko;
 
-		import java.util.concurrent.CountDownLatch;
+	import java.util.concurrent.CountDownLatch;
 
-		/**
-		 * 线程不安全操作代码实例
-		 */
-		public class UnSafeThread {
+	/**
+	 * 线程不安全操作代码实例
+	 */
+	public class UnSafeThread {
 
-		    private static int num = 0;
+	    private static int num = 0;
 
-		    private static CountDownLatch countDownLatch = new CountDownLatch(10);
+	    private static CountDownLatch countDownLatch = new CountDownLatch(10);
 
-		    /**
-		     * 每次调用对num进行++操作
-		     */
-		    public static void inCreate() {
-		        num++;
-		    }
+	    /**
+	     * 每次调用对num进行++操作
+	     */
+	    public static void inCreate() {
+		num++;
+	    }
 
-		    public static void main(String[] args) {
-		        for (int i = 0; i < 10; i++) {
-		            new Thread(()->{
-		                for (int j = 0; j < 100; j++) {
-		                    inCreate();
-		                    try {
-		                        Thread.sleep(10);
-		                    } catch (InterruptedException e) {
-		                        e.printStackTrace();
-		                    }
-		                }
-		                //每个线程执行完成之后，调用countdownLatch
-		                countDownLatch.countDown();
-		            }).start();
-		        }
-
-		        while (true) {
-		            if (countDownLatch.getCount() == 0) {
-		                System.out.println(num);
-		                break;
-		            }
-		        }
-		    }
+	    public static void main(String[] args) {
+		for (int i = 0; i < 10; i++) {
+		    new Thread(()->{
+			for (int j = 0; j < 100; j++) {
+			    inCreate();
+			    try {
+				Thread.sleep(10);
+			    } catch (InterruptedException e) {
+				e.printStackTrace();
+			    }
+			}
+			//每个线程执行完成之后，调用countdownLatch
+			countDownLatch.countDown();
+		    }).start();
 		}
 
+		while (true) {
+		    if (countDownLatch.getCount() == 0) {
+			System.out.println(num);
+			break;
+		    }
+		}
+	    }
+	}
 
-并发编程的挑战之资源限制
-		硬件资源
-			服务器： 1m
-			本机：2m
 
-			带宽的上传/下载速度、硬盘读写速度和CPU的处理速度。
-
-		软件资源
-			数据库连接 500个连接  1000个线程查询  并不会因此而加快
-			socket
+   ##### 并发编程的挑战之资源限制
+	硬件资源
+		服务器： 1m
+		本机：2m
+		带宽的上传/下载速度、硬盘读写速度和CPU的处理速度。
+	软件资源
+		数据库连接 500个连接  1000个线程查询  并不会因此而加快
+		Socket
