@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
-import com.beans.java8.Book;
+import com.beans.java8.entity.Book;
 
 public class Demo {
 	@Test
