@@ -8,8 +8,7 @@ public class Demo2 {
 		for (int i = 0; i < 1000; i++) {
 			list.add("demo"+i);
 		}
-		
-		
+			
 		for (int j=0; j<4; j++){
 			new Thread(() -> {
 				list.forEach((s) -> {
