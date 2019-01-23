@@ -35,7 +35,6 @@
 	3、ThreadLocal.remove: 移除ThreadLocal中当前线程共享变量的值。
 	4、ThreadLocal.initialValue: ThreadLocal没有被当前线程赋值时或当前线程刚调用remove方法后调用get方法，返回此方法值。
 
-
 ##### 06 Condition的使用
 	可以在一个锁里面，存在多种等待条件
 	主要的方法
