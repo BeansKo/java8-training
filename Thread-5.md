@@ -1,19 +1,18 @@
 #### 第五章--线程间的通信
 ##### 01 wait、notify、notifyAll
+		何时使用
+			在多线程环境下，有时候一个线程的执行，依赖于另外一个线程的某种状态的改变，这个时候，我们就可以使用wait与notify或者notifyAll
 
-	何时使用
-		在多线程环境下，有时候一个线程的执行，依赖于另外一个线程的某种状态的改变，这个时候，我们就可以使用wait与notify或者notifyAll
+		wait跟sleep的区别
+			wait会释放持有的锁，而sleep不会，sleep只是让线程在指定的时间内，不去抢占cpu的资源
 
-	wait跟sleep的区别
-		wait会释放持有的锁，而sleep不会，sleep只是让线程在指定的时间内，不去抢占cpu的资源
+		注意点
+			wait notify必须放在同步代码块中, 且必须拥有当前对象的锁，即不能取得A对象的锁，而调用B对象的wait
+			哪个对象wait，就得调哪个对象的notify
 
-	注意点
-		wait notify必须放在同步代码块中, 且必须拥有当前对象的锁，即不能取得A对象的锁，而调用B对象的wait
-		哪个对象wait，就得调哪个对象的notify
-
-	notify跟notifyAll的区别
-		nofity随机唤醒一个等待的线程
-		notifyAll唤醒所有在该对象上等待的线程
+		notify跟notifyAll的区别
+			nofity随机唤醒一个等待的线程
+			notifyAll唤醒所有在该对象上等待的线程
 
 ##### 02 等待通知经典模型之生产者消费者
  	生产者消费者模型一般包括：生产者、消费者、中间商
