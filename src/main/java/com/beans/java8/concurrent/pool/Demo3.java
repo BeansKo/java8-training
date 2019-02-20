@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit;
 public class Demo3 {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
+		LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<>(5);
+		//x=16  x>c+q  x-q<m   启动x-q个线程
 		ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 3, TimeUnit.SECONDS, queue);
 		Future<String> submit = null;
 		for (int i=0;i<100;i++) {
