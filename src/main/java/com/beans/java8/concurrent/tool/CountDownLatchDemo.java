@@ -20,6 +20,7 @@ public class CountDownLatchDemo {
 			System.out.println("800米比赛结束，准备清空跑道并继续跨栏比赛");
 		}).start();
 		
+		
 		for (int i=0; i<countDownLatch.getCount(); i++) {
 			int finalI = i;
 			new Thread(() -> {
