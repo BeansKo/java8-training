@@ -1,6 +1,6 @@
-第六章--原子类
-	
-	1 什么是原子类
+#### 第六章--原子类
+
+##### 1 什么是原子类
 		一度认为原子是不可分割的最小单位，故原子类可以认为其操作都是不可分割
 
 		为什么要有原子类？
@@ -11,12 +11,9 @@
 			囊括了原子更新基本类型、原子更新数组、原子更新属性、原子更新引用
 
 		1.8新增的原子类
-			DoubleAccumulator、DoubleAdder、LongAccumulator、LongAdder、Striped64
+			DoubleAccumulator、DoubleAdder、LongAccumulator、LongAdder、Striped64、
 
-
-
-
-	2 原子更新基本类型
+##### 2 原子更新基本类型
 		发展至JDk1.8，基本类型原子类有以下几个：
 			AtomicBoolean、AtomicInteger、AtomicLong、DoubleAccumulator、DoubleAdder、
 			LongAccumulator、LongAdder
@@ -25,16 +22,11 @@
 			DoubleAdder、LongAdder  对Double、Long的原子更新性能进行优化提升
 			DoubleAccumulator、LongAccumulator  支持自定义运算
 
-
-
-
-	3 原子更新数组类型
+##### 3 原子更新数组类型
 		AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray
 
 
-
-
-	4 原子地更新属性
+##### 4 原子地更新属性
 
 		原子地更新某个类里的某个字段时，就需要使用原子更新字段类，Atomic包提供了以下4个类进行原子字段更新
 		AtomicIntegerFieldUpdater、AtomicLongFieldUpdater、AtomicStampedReference、AtomicReferenceFieldUpdater
@@ -50,9 +42,7 @@
 		如果要修改包装类型就需要使用AtomicReferenceFieldUpdater。
 
 
-
-
-	5 原子更新引用
+##### 5 原子更新引用
 		AtomicReference：用于对引用的原子更新
 		AtomicMarkableReference：带版本戳的原子引用类型，版本戳为boolean类型。
 		AtomicStampedReference：带版本戳的原子引用类型，版本戳为int类型。
